@@ -3673,7 +3673,7 @@ public class MethodSummary {
                 s.size = this.size;
                 System.arraycopy(this.elementData, 0, s.elementData, 0, this.size);
                 return s;
-            } catch (CloneNotSupportedException _) { return null; }
+            } catch (CloneNotSupportedException cnse) { return null; }
         }
         
         public boolean equals(Object o) {

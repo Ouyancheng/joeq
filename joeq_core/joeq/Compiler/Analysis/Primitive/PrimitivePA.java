@@ -3479,8 +3479,8 @@ public class PrimitivePA {
                         }
                     }
                 }
-            } catch (InvocationTargetException _) {
-            } catch (IllegalAccessException _) { 
+            } catch (InvocationTargetException ite) {
+            } catch (IllegalAccessException iae) {
             }
         }
         return "";
@@ -3602,7 +3602,7 @@ public class PrimitivePA {
             }
             b.getFactory().save(out, b);
         } finally {
-            if (out != null) try { out.close(); } catch (IOException _) { }
+            if (out != null) try { out.close(); } catch (IOException ioe) { }
         }
     }
     
@@ -4194,7 +4194,7 @@ public class PrimitivePA {
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
-                if (in != null) try { in.close(); } catch (IOException _) {}
+                if (in != null) try { in.close(); } catch (IOException ioe) {}
             }
         }
     }

@@ -942,7 +942,7 @@ public class IPSSABuilder implements Runnable {
                 e.printStackTrace();
                 return;
             } finally {
-                if (fi != null) try { fi.close(); } catch (IOException _) { }
+                if (fi != null) try { fi.close(); } catch (IOException ioe) { }
             }
         }
     }

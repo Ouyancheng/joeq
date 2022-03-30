@@ -87,7 +87,7 @@ public abstract class CompilationState implements CompilationConstants {
         public jq_Member tryResolve(jq_Member m) {
             try {
                 m = m.resolve();
-            } catch (Error _) { }
+            } catch (Error err) { }
             return m;
         }
 
@@ -220,7 +220,7 @@ public abstract class CompilationState implements CompilationConstants {
         public jq_Member tryResolve(jq_Member m) {
             try {
                 m = m.resolve();
-            } catch (Error _) { }
+            } catch (Error err) { }
             return m;
         }
 
@@ -298,7 +298,7 @@ public abstract class CompilationState implements CompilationConstants {
             if (m.getDeclaringClass().isPrepared()) {
                 try {
                     m = m.resolve();
-                } catch (Error _) { }
+                } catch (Error err) { }
             }
             return m;
         }
@@ -309,7 +309,7 @@ public abstract class CompilationState implements CompilationConstants {
         public jq_Member resolve(jq_Member m) {
             try {
                 m = m.resolve();
-            } catch (Error _) { }
+            } catch (Error err) { }
             return m;
         }
 

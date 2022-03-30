@@ -48,13 +48,13 @@ public class ReflectiveInterpreter extends BytecodeInterpreter {
         for (int i=param_jq.length-1; i>=offset; --i) {
             Class pc = param_jdk[i-offset] = Reflection.getJDKType(param_jq[i]);
             if (pc.isPrimitive()) {
-                if (pc == Integer.TYPE) param[i-offset] = new Integer(istate.pop_I());
-                else if (pc == Long.TYPE) param[i-offset] = new Long(istate.pop_L());
-                else if (pc == Float.TYPE) param[i-offset] = new Float(istate.pop_F());
-                else if (pc == Double.TYPE) param[i-offset] = new Double(istate.pop_D());
-                else if (pc == Byte.TYPE) param[i-offset] = new Byte((byte)istate.pop_I());
-                else if (pc == Short.TYPE) param[i-offset] = new Short((short)istate.pop_I());
-                else if (pc == Character.TYPE) param[i-offset] = new Character((char)istate.pop_I());
+                if (pc == Integer.TYPE) param[i-offset] = Integer.valueOf(istate.pop_I());  // new Integer(istate.pop_I());
+                else if (pc == Long.TYPE) param[i-offset] = Long.valueOf(istate.pop_L());   // new Long(istate.pop_L());
+                else if (pc == Float.TYPE) param[i-offset] = Float.valueOf(istate.pop_F()); // new Float(istate.pop_F());
+                else if (pc == Double.TYPE) param[i-offset] = Double.valueOf(istate.pop_D()); // new Double(istate.pop_D());
+                else if (pc == Byte.TYPE) param[i-offset] = Byte.valueOf((byte)istate.pop_I()); // new Byte((byte)istate.pop_I());
+                else if (pc == Short.TYPE) param[i-offset] = Short.valueOf((short)istate.pop_I()); // new Short((short)istate.pop_I());
+                else if (pc == Character.TYPE) param[i-offset] = Character.valueOf((char)istate.pop_I()); // new Character((char)istate.pop_I());
                 else if (pc == Boolean.TYPE) param[i-offset] = Convert.getBoolean(istate.pop_I()!=0);
                 else Assert.UNREACHABLE(pc.toString());
             } else {
@@ -108,13 +108,13 @@ public class ReflectiveInterpreter extends BytecodeInterpreter {
             jq_Type t = paramTypes[i];
             if (t.isPrimitiveType()) {
                 if (t == jq_Primitive.LONG) {
-                    params[i] = new Long(istate.pop_L());
+                    params[i] = Long.valueOf(istate.pop_L()); // new Long(istate.pop_L());
                 } else if (t == jq_Primitive.FLOAT) {
-                    params[i] = new Float(istate.pop_F());
+                    params[i] = Float.valueOf(istate.pop_F()); // new Float(istate.pop_F());
                 } else if (t == jq_Primitive.DOUBLE) {
-                    params[i] = new Double(istate.pop_D());
+                    params[i] = Double.valueOf(istate.pop_D()); // new Double(istate.pop_D());
                 } else {
-                    params[i] = new Integer(istate.pop_I());
+                    params[i] = Integer.valueOf(istate.pop_I()); // new Integer(istate.pop_I());
                 }
             } else {
                 params[i] = istate.pop_A();
@@ -171,13 +171,13 @@ public class ReflectiveInterpreter extends BytecodeInterpreter {
             } else if (returnType == jq_Primitive.VOID) {
                 retval = null;
             } else if (returnType == jq_Primitive.LONG) {
-                retval = new Long(callee.getReturnVal_L());
+                retval = Long.valueOf(callee.getReturnVal_L()); // new Long(callee.getReturnVal_L());
             } else if (returnType == jq_Primitive.FLOAT) {
-                retval = new Float(callee.getReturnVal_F());
+                retval = Float.valueOf(callee.getReturnVal_F()); // new Float(callee.getReturnVal_F());
             } else if (returnType == jq_Primitive.DOUBLE) {
-                retval = new Double(callee.getReturnVal_D());
+                retval = Double.valueOf(callee.getReturnVal_D()); // new Double(callee.getReturnVal_D());
             } else {
-                retval = new Integer(callee.getReturnVal_I());
+                retval = Integer.valueOf(callee.getReturnVal_I()); // new Integer(callee.getReturnVal_I());
             }
             if (mi.getTraceFlag())
                 mi.getTraceOut().println("Return value: "+retval);
@@ -217,13 +217,13 @@ public class ReflectiveInterpreter extends BytecodeInterpreter {
         jq_StaticMethod _longBitsToDouble = _class.getOrCreateStaticMethod("longBitsToDouble", "(J)D");
 
         if (f == _floatToIntBits) {
-            return new Integer(Float.floatToRawIntBits(istate.pop_F()));
+            return Integer.valueOf(Float.floatToRawIntBits(istate.pop_F())); // new Integer(Float.floatToRawIntBits(istate.pop_F()));
         } else if (f == _intBitsToFloat) {
-            return new Float(Float.intBitsToFloat(istate.pop_I()));
+            return Float.valueOf(Float.intBitsToFloat(istate.pop_I())); // new Float(Float.intBitsToFloat(istate.pop_I()));
         } else if (f == _doubleToLongBits) {
-            return new Long(Double.doubleToRawLongBits(istate.pop_D()));
+            return Long.valueOf(Double.doubleToRawLongBits(istate.pop_D())); // new Long(Double.doubleToRawLongBits(istate.pop_D()));
         } else if (f == _longBitsToDouble) {
-            return new Double(Double.longBitsToDouble(istate.pop_L()));
+            return Double.valueOf(Double.longBitsToDouble(istate.pop_L())); // new Double(Double.longBitsToDouble(istate.pop_L()));
         } else {
             return invokeReflective(f);
         }
@@ -251,10 +251,10 @@ public class ReflectiveInterpreter extends BytecodeInterpreter {
             this.sp = 0;
         }
 
-        public void push_I(int v) { stack[sp++] = new Integer(v); }
-        public void push_L(long v) { stack[sp++] = new Long(v); stack[sp++] = null; }
-        public void push_F(float v) { stack[sp++] = new Float(v); }
-        public void push_D(double v) { stack[sp++] = new Double(v); stack[sp++] = null; }
+        public void push_I(int v) { stack[sp++] = Integer.valueOf(v); /*new Integer(v);*/ }
+        public void push_L(long v) { stack[sp++] = Long.valueOf(v); /*new Long(v);*/ stack[sp++] = null; }
+        public void push_F(float v) { stack[sp++] = Float.valueOf(v); /*new Float(v);*/ }
+        public void push_D(double v) { stack[sp++] = Double.valueOf(v); /*new Double(v);*/ stack[sp++] = null; }
         public void push_A(Object v) { stack[sp++] = v; }
         public void push(Object v) { stack[sp++] = v; }
         public int pop_I() { return ((Integer)stack[--sp]).intValue(); }
@@ -265,20 +265,20 @@ public class ReflectiveInterpreter extends BytecodeInterpreter {
         public Object pop() { return stack[--sp]; }
         public void popAll() { sp = 0; }
         public Object peek_A(int depth) { return stack[sp-depth-1]; }
-        public void setLocal_I(int i, int v) { locals[i] = new Integer(v); }
-        public void setLocal_L(int i, long v) { locals[i] = new Long(v); }
-        public void setLocal_F(int i, float v) { locals[i] = new Float(v); }
-        public void setLocal_D(int i, double v) { locals[i] = new Double(v); }
+        public void setLocal_I(int i, int v) { locals[i] = Integer.valueOf(v); /*new Integer(v);*/ }
+        public void setLocal_L(int i, long v) { locals[i] = Long.valueOf(v); /*new Long(v);*/ }
+        public void setLocal_F(int i, float v) { locals[i] = Float.valueOf(v); /*new Float(v);*/ }
+        public void setLocal_D(int i, double v) { locals[i] = Double.valueOf(v); /*new Double(v);*/ }
         public void setLocal_A(int i, Object v) { locals[i] = v; }
         public int getLocal_I(int i) { return ((Integer)locals[i]).intValue(); }
         public long getLocal_L(int i) { return ((Long)locals[i]).longValue(); }
         public float getLocal_F(int i) { return ((Float)locals[i]).floatValue(); }
         public double getLocal_D(int i) { return ((Double)locals[i]).doubleValue(); }
         public Object getLocal_A(int i) { return locals[i]; }
-        public void return_I(int v) { result = new Integer(v); }
-        public void return_L(long v) { result = new Long(v); }
-        public void return_F(float v) { result = new Float(v); }
-        public void return_D(double v) { result = new Double(v); }
+        public void return_I(int v) { result = Integer.valueOf(v); /*new Integer(v);*/ }
+        public void return_L(long v) { result = Long.valueOf(v); /*new Long(v);*/ }
+        public void return_F(float v) { result = Float.valueOf(v); /*new Float(v);*/ }
+        public void return_D(double v) { result = Double.valueOf(v); /*new Double(v);*/ }
         public void return_A(Object v) { result = v; }
         public void return_V() {}
         public int getReturnVal_I() { return ((Integer)result).intValue(); }
@@ -410,7 +410,7 @@ public class ReflectiveInterpreter extends BytecodeInterpreter {
                 else if (paramTypes[i] == jq_Primitive.SHORT)
                     args[m] = Short.valueOf(s_args[++j]);
                 else if (paramTypes[i] == jq_Primitive.CHAR)
-                    args[m] = new Character(s_args[++j].charAt(0));
+                    args[m] = Character.valueOf(s_args[++j].charAt(0)); // new Character(s_args[++j].charAt(0));
                 else if (paramTypes[i] == jq_Primitive.INT)
                     args[m] = Integer.valueOf(s_args[++j]);
                 else if (paramTypes[i] == jq_Primitive.LONG) {

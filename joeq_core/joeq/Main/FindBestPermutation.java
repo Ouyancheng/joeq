@@ -128,7 +128,7 @@ public class FindBestPermutation extends Thread {
             in.close();
         } catch (IOException x) {
         } finally {
-            if (in != null) try { in.close(); } catch (IOException _) { }
+            if (in != null) try { in.close(); } catch (IOException ioe) { }
         }
     }
     

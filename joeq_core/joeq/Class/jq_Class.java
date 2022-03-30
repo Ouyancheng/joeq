@@ -799,7 +799,7 @@ public final class jq_Class extends jq_Reference implements jq_ClassFileConstant
             x.printStackTrace(); // for debugging
             throw new ClassFormatError(x.toString());
         } finally {
-            try { if (in != null) in.close(); } catch (IOException _) { }
+            try { if (in != null) in.close(); } catch (IOException ioe) { }
         }
     }
     public void load(DataInput in)

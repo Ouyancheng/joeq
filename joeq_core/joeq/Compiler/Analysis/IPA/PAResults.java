@@ -565,14 +565,14 @@ public class PAResults implements PointerAnalysisResults {
                         allbdds.add(f[i].getName());
                     }
                 }
-            } catch (IllegalAccessException _) { }
+            } catch (IllegalAccessException iae) { }
         }
         f = PAResults.class.getDeclaredFields();
         for (int i = 0; i < f.length; i++) {
             try {
                 if (f[i].getType() == BDD.class && f[i].get(this) != null)
                     allbdds.add(f[i].getName());
-            } catch (IllegalAccessException _) { }
+            } catch (IllegalAccessException iae) { }
         }
         if (storedBDDs.size() > 0)
             allbdds.add("stored BDDs " + (storedBDDs.keySet()) + "\n");
@@ -1862,9 +1862,9 @@ public class PAResults implements PointerAnalysisResults {
                         ProgramLocation pl = (ProgramLocation)m.invoke(o, null);
                         if (pl != null)
                             return sourceLister.list(pl, /*withnumbers=*/true, before, after); 
-                    } catch (NoSuchMethodException _) {
-                    } catch (InvocationTargetException _) {
-                    } catch (IllegalAccessException _) {
+                    } catch (NoSuchMethodException nsme) {
+                    } catch (InvocationTargetException ite) {
+                    } catch (IllegalAccessException iae) {
                     }
                 }
                 return "no source available for "+o+"\n";

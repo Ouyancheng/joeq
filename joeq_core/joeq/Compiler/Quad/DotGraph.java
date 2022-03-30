@@ -90,8 +90,8 @@ public class DotGraph implements ControlFlowGraphVisitor {
                 containedgraph
                         .println("\tedge[fontname = \"Arial\", fontcolor=red, fontsize=8];");
                 containedgraph.println("\tlabel = \"" + name + "\";");
-            } catch (IOException _) {
-                _.printStackTrace(System.err);
+            } catch (IOException ioe) {
+                ioe.printStackTrace(System.err);
             }
         }
         public static void openGraph(String name) {

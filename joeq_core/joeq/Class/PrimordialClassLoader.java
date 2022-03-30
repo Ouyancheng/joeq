@@ -595,7 +595,7 @@ public class PrimordialClassLoader extends ClassLoader implements jq_ClassFileCo
             x.printStackTrace(); // for debugging
             throw new ClassFormatError(x.toString());
         } finally {
-            try { if (in != null) in.close(); } catch (IOException _) { }
+            try { if (in != null) in.close(); } catch (IOException ioe) { }
         }
     }
     

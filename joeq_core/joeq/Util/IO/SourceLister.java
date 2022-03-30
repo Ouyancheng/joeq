@@ -98,7 +98,7 @@ public class SourceLister {
                 } catch (IOException io) {
                     continue outer;
                 } finally {
-                    if (r != null) try { r.close(); } catch (IOException _) { }
+                    if (r != null) try { r.close(); } catch (IOException ioe) { }
                 }
                 return res.toString();
             }
