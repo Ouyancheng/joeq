@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Support">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/joeq/Support/javabdd-2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/joeq/Support/jwutil-1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/joeq/Support/java14.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
